@@ -81,7 +81,7 @@ export default function Profile() {
 
     return (
         <div style={{ backgroundColor: `rgb(${user.theme})` }}>
-            <header className='fixed z-40 w-screen'>
+            <header className='z-40 w-screen'>
                 <nav className='flex items-center justify-between p-2 mx-auto max-w-7xl'>
                     <div className='flex items-center flex-grow basis-0'>
                         <Link href='/' className='text-lg font-semibold tracking-wider' style={COLOR_CALC < 186 ? { color: '#FFFFFF' } : {}}>
@@ -127,19 +127,7 @@ export default function Profile() {
                 </nav>
             </header>
             <div className='relative top-0 flex flex-col h-full min-h-screen pb-10 mx-auto max-w-7xl'>
-                {/* <header className='flex items-center justify-between p-4'>
-                    <div className='font-bold ext-lg '>
-                        <a href='/' style={COLOR_CALC < 186 ? { color: '#FFFFFF' } : {}}>
-                            ProfileLink
-                        </a>
-                    </div>
-                    <a href='profile/edit'>
-                        <div className='px-6 py-2 text-sm font-semibold text-white transition bg-gray-900 rounded-full cursor-pointer select-none bg-opacity-40 hover:bg-opacity-60' style={COLOR_CALC < 186 ? { color: '#4B5563', backgroundColor: '#FFFFFF' } : {}}>
-                            Edit
-                        </div>
-                    </a>
-                </header> */}
-                <section className='flex flex-col items-center mt-20' style={COLOR_CALC > 186 ? { color: '#4B5563' } : { color: '#FFFFFF' }}>
+                <section className='flex flex-col items-center' style={COLOR_CALC > 186 ? { color: '#4B5563' } : { color: '#FFFFFF' }}>
                     <Image src={user.profilePic} width='0' height='0' sizes='100%' className='w-24 h-24 mb-6 rounded-full bg-slate-950 bg-opacity-30' />
                     <h1 className='mb-2 text-xl font-bold'>{user.name}</h1>
                     <h2 className='mb-10 text-center text-md'>{user.bio}</h2>

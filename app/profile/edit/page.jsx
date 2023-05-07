@@ -89,7 +89,7 @@ export default function Edit() {
         ],
     };
     return (
-        <div className='bg-gray-100'>
+        <div className='transition bg-white md:bg-gray-100'>
             <header className='fixed z-40 w-screen bg-white border-b border-gray-200'>
                 <nav className='flex items-center justify-between p-2 mx-auto max-w-7xl'>
                     <div className='flex items-center flex-grow basis-0'>
@@ -159,7 +159,7 @@ export default function Edit() {
                                     <label className='block pr-4 mb-1' for='name'>
                                         Name
                                     </label>
-                                    <input className='w-full p-2 leading-tight text-gray-700 transition bg-gray-100 border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='name' type='text' />
+                                    <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='name' type='text' />
                                 </div>
 
                                 <div className='w-full'>
@@ -168,7 +168,7 @@ export default function Edit() {
                                     </label>
                                     <div className='relative flex items-center'>
                                         <div className='absolute mb-1 select-none left-2'>@</div>
-                                        <input className='w-full p-2 pl-6 leading-tight text-gray-700 transition bg-gray-100 border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='username' type='text' />
+                                        <input className='w-full p-2 pl-6 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='username' type='text' />
                                     </div>
                                 </div>
 
@@ -176,7 +176,7 @@ export default function Edit() {
                                     <label className='block pr-4 mb-1' for='bio'>
                                         Bio
                                     </label>
-                                    <textarea className='min-h-[100px] w-full p-2 leading-tight text-gray-700 transition bg-gray-100 border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='bio'></textarea>
+                                    <textarea className='min-h-[100px] w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='bio'></textarea>
                                 </div>
                             </div>
                         </section>
@@ -190,7 +190,7 @@ export default function Edit() {
                                         RGB
                                     </label>
                                     <div className='flex gap-4'>
-                                        <input className='w-full p-2 leading-tight text-gray-700 transition bg-gray-100 border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='rba' type='text' value={user.theme.join(', ')} />
+                                        <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='rba' type='text' value={user.theme.join(', ')} />
                                         <div className='w-12 h-10 rounded-md' style={{ backgroundColor: `rgb(${user.theme})` }}></div>
                                     </div>
                                 </div>
@@ -204,29 +204,30 @@ export default function Edit() {
                                     Add social
                                 </button>
                             </div>
-
-                            <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2'>
-                                {user.socials.map((social) => {
-                                    return (
-                                        <div className='box-border flex flex-col w-full px-3 py-2 bg-white shadow-md shadow-outline rounded-xl'>
-                                            <div className='flex items-center'>
-                                                <Image src={`/${social.platform}-black.svg`} width='0' height='0' sizes='100%' className='w-6 h-6' />
-                                                <div className='flex flex-col flex-grow px-4 basis-1'>
-                                                    <p className='flex-grow mb-1 text-sm font-semibold basis-0'>{social.platform}</p>
-                                                    <p className='text-sm'>@{social.username}</p>
+                            <div className='bg-white sm:p-6 rounded-xl'>
+                                <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2'>
+                                    {user.socials.map((social) => {
+                                        return (
+                                            <div className='box-border flex flex-col w-full px-3 py-2 bg-gray-300 rounded-xl'>
+                                                <div className='flex items-center'>
+                                                    <Image src={`/${social.platform}-black.svg`} width='0' height='0' sizes='100%' className='w-6 h-6' />
+                                                    <div className='flex flex-col flex-grow px-4 basis-1'>
+                                                        <p className='flex-grow mb-1 text-sm font-semibold basis-0'>{social.platform}</p>
+                                                        <p className='text-sm'>@{social.username}</p>
+                                                    </div>
+                                                    <button onClick={() => setSocialOpen(true)} className='px-3 py-1.5 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>
+                                                        Edit
+                                                    </button>
                                                 </div>
-                                                <button onClick={() => setSocialOpen(true)} className='px-3 py-1.5 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>
-                                                    Edit
-                                                </button>
                                             </div>
-                                        </div>
-                                    );
-                                })}
+                                        );
+                                    })}
+                                </div>
                             </div>
                         </section>
                     </div>
 
-                    <div className='box-border flex flex-col gap-4 md:pl-5 md:w-6/12 sm:mt-4'>
+                    <div className='box-border flex flex-col gap-4 mt-10 sm:mt-4 md:pl-5 md:w-6/12 md:mt-0'>
                         <section className='flex flex-col gap-2'>
                             <div className='flex items-center justify-between h-[36px]'>
                                 <p className='ml-2 font-semibold text-md'>Links</p>
@@ -235,7 +236,7 @@ export default function Edit() {
                             <div className='flex flex-col gap-4'>
                                 {user.links.map((link) => {
                                     return (
-                                        <div className='flex flex-col px-6 py-4 bg-white shadow-md shadow-outline rounded-xl'>
+                                        <div className='flex flex-col px-6 py-4 bg-white border-b md:shadow-md md:shadow-outline md:rounded-xl last:border-b-0'>
                                             <div className='flex items-center'>
                                                 <Image src={`https://www.google.com/s2/favicons?domain=${link.favicon}&sz=64`} width='0' height='0' sizes='100%' className='w-10 h-10' />
                                                 <div className='px-4 overflow-hidden'>
