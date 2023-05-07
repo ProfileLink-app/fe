@@ -51,7 +51,7 @@ export default function Edit() {
             },
             {
                 platform: 'LinkedIn',
-                username: 'dylanmbaker',
+                username: 'dylanmbakewreqtgwertretr',
                 url: 'url.com',
             },
         ],
@@ -89,7 +89,7 @@ export default function Edit() {
         ],
     };
     return (
-        <div className='transition bg-white md:bg-gray-100'>
+        <div className='transition bg-gray-100'>
             <header className='fixed z-40 w-screen bg-white border-b border-gray-200'>
                 <nav className='flex items-center justify-between p-2 mx-auto max-w-7xl'>
                     <div className='flex items-center flex-grow basis-0'>
@@ -140,14 +140,14 @@ export default function Edit() {
                     </div>
                 </nav>
             </header>
-            <div className='relative top-0 flex justify-center h-full min-h-screen px-2 pb-10 mx-auto max-w-7xl '>
+            <div className='relative top-0 flex justify-center h-full min-h-screen pb-10 mx-auto md:px-2 max-w-7xl '>
                 <section className='flex flex-col w-full mt-20 md:flex-row'>
                     <div className='box-border flex flex-col w-full gap-4 md:pr-5 '>
-                        <section className='flex flex-col gap-2'>
-                            <div className='flex items-center justify-between h-[36px]'>
+                        <section className='flex flex-col gap-2 bg-white md:bg-transparent'>
+                            <div className='flex items-center justify-between h-[36px] px-2 md:px-0'>
                                 <p className='font-semibold text-md'>About</p>
                             </div>
-                            <div className='flex flex-col gap-4 p-6 bg-white rounded-xl'>
+                            <div className='flex flex-col gap-4 px-2 bg-white md:p-6 rounded-xl'>
                                 {/* Add this functionality later */}
                                 <div className='flex items-center gap-4'>
                                     <Image src={user.profilePic} width='0' height='0' sizes='100%' className='w-16 h-16 rounded-full bg-slate-950 bg-opacity-30' />
@@ -180,11 +180,11 @@ export default function Edit() {
                                 </div>
                             </div>
                         </section>
-                        <section className='flex flex-col gap-2'>
-                            <div className='flex items-center justify-between h-[36px]'>
+                        <section className='flex flex-col gap-2 pb-2 bg-white md:bg-transparent'>
+                            <div className='flex items-center justify-between h-[36px] px-2 md:px-0'>
                                 <p className='font-semibold text-md'>Theme</p>
                             </div>
-                            <div className='p-6 bg-white rounded-xl'>
+                            <div className='flex flex-col gap-4 px-2 bg-white md:p-6 rounded-xl'>
                                 <div className='w-full'>
                                     <label className='block pr-4 mb-1' for='rba'>
                                         RGB
@@ -197,23 +197,23 @@ export default function Edit() {
                             </div>
                         </section>
 
-                        <section className='flex flex-col gap-2'>
-                            <div className='flex items-center justify-between h-[36px]'>
+                        <section className='flex flex-col gap-2 py-2 bg-white md:bg-transparent'>
+                            <div className='flex items-center justify-between h-[36px] px-2 md:px-0'>
                                 <p className='font-semibold text-md'>Socials</p>
                                 <button onClick={() => setSocialOpen(true)} className='px-3 py-1.5 mb-1 text-sm text-white transition rounded-full bg-secondary hover:bg-secondary-hover'>
                                     Add social
                                 </button>
                             </div>
-                            <div className='bg-white sm:p-6 rounded-xl'>
+                            <div className='flex flex-col gap-4 px-2 bg-white md:p-6 rounded-xl'>
                                 <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2'>
                                     {user.socials.map((social) => {
                                         return (
                                             <div className='box-border flex flex-col w-full px-3 py-2 bg-gray-300 rounded-xl'>
                                                 <div className='flex items-center'>
                                                     <Image src={`/${social.platform}-black.svg`} width='0' height='0' sizes='100%' className='w-6 h-6' />
-                                                    <div className='flex flex-col flex-grow px-4 basis-1'>
-                                                        <p className='flex-grow mb-1 text-sm font-semibold basis-0'>{social.platform}</p>
-                                                        <p className='text-sm'>@{social.username}</p>
+                                                    <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
+                                                        <p className='flex-grow mb-0.5 text-sm font-semibold basis-0'>{social.platform}</p>
+                                                        <p className='overflow-hidden text-xs text-ellipsis whitespace-nowrap'>@{social.username}</p>
                                                     </div>
                                                     <button onClick={() => setSocialOpen(true)} className='px-3 py-1.5 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>
                                                         Edit
@@ -228,20 +228,20 @@ export default function Edit() {
                     </div>
 
                     <div className='box-border flex flex-col gap-4 mt-10 sm:mt-4 md:pl-5 md:w-6/12 md:mt-0'>
-                        <section className='flex flex-col gap-2'>
-                            <div className='flex items-center justify-between h-[36px]'>
+                        <section className='flex flex-col gap-2 py-2 bg-white md:bg-transparent'>
+                            <div className='flex items-center justify-between h-[36px] px-2 md:px-0'>
                                 <p className='ml-2 font-semibold text-md'>Links</p>
                                 <button className='px-3 py-1.5 mb-1 text-sm text-white transition rounded-full bg-secondary hover:bg-secondary-hover'>Add link</button>
                             </div>
-                            <div className='flex flex-col gap-4'>
+                            <div className='flex flex-col px-2 bg-white md:p-6 rounded-xl'>
                                 {user.links.map((link) => {
                                     return (
-                                        <div className='flex flex-col px-6 py-4 bg-white border-b md:shadow-md md:shadow-outline md:rounded-xl last:border-b-0'>
+                                        <div className='flex flex-col px-2 py-4 bg-white border-b md:px-0 last:border-b-0'>
                                             <div className='flex items-center'>
                                                 <Image src={`https://www.google.com/s2/favicons?domain=${link.favicon}&sz=64`} width='0' height='0' sizes='100%' className='w-10 h-10' />
-                                                <div className='px-4 overflow-hidden'>
-                                                    <p className='flex-grow mb-1 overflow-hidden text-sm font-semibold basis-0 whitespace-nowrap text-ellipsis'>{link.title}</p>
-                                                    <p className='flex-grow overflow-hidden text-sm basis-0 text-ellipsis whitespace-nowrap'>{link.url}</p>
+                                                <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
+                                                    <p className='overflow-hidden text-sm font-semibold text-ellipsis whitespace-nowrap'>{link.title}</p>
+                                                    <p className='overflow-hidden text-xs text-ellipsis whitespace-nowrap'>{link.url}</p>
                                                 </div>
                                                 <div className='flex items-center gap-3 pl-2'>
                                                     <Switch checked={enabled} onChange={setEnabled} className={`${enabled ? 'bg-green-600' : 'bg-gray-400'} relative inline-flex h-[19px] w-[37px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}>
