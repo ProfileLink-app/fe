@@ -22,7 +22,7 @@ export default function SignIn() {
             </header>
 
             <div className='flex items-center justify-center mx-auto max-w-7xl'>
-                <div className='mx-2 right-0 flex flex-col gap-2 p-10 mt-16 sm:bg-white sm:shadow-xl sm:shadow-outline max-w-[550px] w-full sm:drop-shadow-xl rounded-xl transition'>
+            <div className='mx-2 right-0 flex flex-col gap-2 sm:p-10 px-4 mt-16 bg-white sm:shadow-xl sm:shadow-outline max-w-[550px] w-full sm:drop-shadow-xl rounded-xl transition'>
                     <h1 className='mb-3 text-2xl font-semibold'>Sign in to your account</h1>
                     <h3>
                         Not a member yet?{' '}
