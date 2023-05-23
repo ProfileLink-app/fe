@@ -23,7 +23,7 @@ export default function Home() {
             </header>
             {/* Hero Section */}
             <div className='flex flex-col items-start justify-start h-full min-h-screen gap-20 px-6 py-4 mx-auto max-w-7xl'>
-                <div className='flex flex-col items-center w-full mt-20 text-white'>
+                <div className='flex flex-col items-center w-full mt-10 text-white sm:mt-20'>
                     <div className='mb-5 text-4xl font-bold'>
                         Unleash the power of your bio with <span className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-500'>ProfileLink</span>
                     </div>
