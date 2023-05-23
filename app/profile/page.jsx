@@ -8,7 +8,7 @@ export default function Profile() {
         name: 'Dylan Baker',
         bio: "I'm Dylan, a full-stack web developer from Kansas City.",
         profilePic: '/profile.jpg',
-        theme: ['2', '103', '227'],
+        theme: '0067E3',
         socials: [
             {
                 platform: 'instagram',
@@ -80,15 +80,15 @@ export default function Profile() {
     console.log(COLOR_CALC);
 
     return (
-        <div style={{ backgroundColor: `rgb(${user.theme})` }}>
-            <header className='z-40 w-screen'>
-                <nav className='flex items-center justify-between p-2 mx-auto max-w-7xl'>
+        <div style={{ backgroundColor: `#${user.theme}` }}>
+            <header className='z-40 w-full'>
+                <nav className='flex items-center justify-between px-6 py-2 mx-auto max-w-7xl'>
                     <div className='flex items-center flex-grow basis-0'>
                         <Link href='/' className='text-lg font-semibold tracking-wider' style={COLOR_CALC < 186 ? { color: '#FFFFFF' } : {}}>
                             ProfileLink
                         </Link>
                     </div>
-                    <div className='flex items-center justify-end flex-grow gap-4 pr-4 basis-0'>
+                    <div className='flex items-center justify-end flex-grow gap-4 basis-0'>
                         {/* Add back later if it makes sense */}
                         {/* <div className='flex items-center gap-2 px-2 py-1 bg-gray-200 rounded-full bg-opacity-80'>
                             <div className='w-2 h-2 bg-green-500 rounded-full'></div>

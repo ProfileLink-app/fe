@@ -12,7 +12,7 @@ export default function Edit() {
         name: 'Dylan Baker',
         bio: "I'm Dylan, a full-stack web developer from Kansas City.",
         profilePic: '/profile.jpg',
-        theme: ['2', '103', '227'],
+        theme: '0067E3',
         socials: [
             {
                 platform: 'Instagram',
@@ -89,9 +89,9 @@ export default function Edit() {
         ],
     };
     return (
-        <div className='transition bg-gray-100'>
-            <header className='fixed z-40 w-screen bg-white border-b border-gray-200'>
-                <nav className='flex items-center justify-between p-2 mx-auto max-w-7xl'>
+        <div className='transition bg-white'>
+            <header className='fixed z-40 w-full bg-white border-b border-gray-200'>
+                <nav className='flex items-center justify-between px-6 py-2 mx-auto max-w-7xl'>
                     <div className='flex items-center flex-grow basis-0'>
                         <Link href='/' className='text-lg font-semibold tracking-wider text-primary'>
                             ProfileLink
@@ -102,7 +102,7 @@ export default function Edit() {
                             View Page
                         </Link>
                     </div>
-                    <div className='flex items-center justify-end flex-grow gap-4 pr-4 basis-0'>
+                    <div className='flex items-center justify-end flex-grow gap-4 basis-0'>
                         {/* Add back later if it makes sense */}
                         {/* <div className='flex items-center gap-2 px-2 py-1 bg-gray-200 rounded-full'>
                             <div className='w-2 h-2 bg-green-500 rounded-full'></div>
@@ -140,121 +140,114 @@ export default function Edit() {
                     </div>
                 </nav>
             </header>
-            <div className='relative top-0 flex justify-center h-full min-h-screen pb-10 mx-auto md:px-2 max-w-7xl '>
+            <div className='relative top-0 flex justify-center h-full min-h-screen pb-5 mx-auto md:px-6 max-w-7xl '>
                 <section className='flex flex-col w-full mt-20 md:flex-row'>
-                    <div className='box-border flex flex-col w-full gap-4 md:pr-5 '>
-                        <section className='flex flex-col gap-2 bg-white md:bg-transparent'>
-                            <div className='flex items-center justify-between h-[36px] px-2 md:px-0'>
+                    <div className='box-border flex flex-col w-full md:gap-4 md:pr-5 '>
+                        <section className='flex flex-col gap-4 p-4 px-6 border-b border-gray-300 md:border md:rounded-xl'>
+                            <div className='flex items-center justify-between'>
                                 <p className='font-semibold text-md'>About</p>
                             </div>
-                            <div className='flex flex-col gap-4 px-2 bg-white md:p-6 rounded-xl'>
-                                {/* Add this functionality later */}
-                                <div className='flex items-center gap-4'>
-                                    <Image src={user.profilePic} width='0' height='0' sizes='100%' className='w-16 h-16 rounded-full bg-slate-950 bg-opacity-30' />
-                                    <button className='px-4 py-2 text-sm font-medium text-white transition rounded-md bg-primary hover:bg-primary-hover h-min'>Choose photo</button>
-                                    <button className='px-4 py-2 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>Delete</button>
-                                </div>
-                                {/* End */}
-                                <div className='w-full'>
-                                    <label className='block pr-4 mb-1' for='name'>
-                                        Name
-                                    </label>
-                                    <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='name' type='text' />
-                                </div>
+                            {/* Add this functionality later */}
+                            <div className='flex items-center gap-4'>
+                                <Image src={user.profilePic} width='0' height='0' sizes='100%' className='w-16 h-16 rounded-full bg-slate-950 bg-opacity-30' />
+                                <button className='px-4 py-2 text-sm font-medium text-white transition rounded-md bg-primary hover:bg-primary-hover h-min'>Choose photo</button>
+                                <button className='px-4 py-2 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>Delete</button>
+                            </div>
+                            {/* End */}
+                            <div className='w-full'>
+                                <label className='block pr-4 mb-1' for='name'>
+                                    Name
+                                </label>
+                                <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='name' type='text' />
+                            </div>
 
-                                <div className='w-full'>
-                                    <label className='block pr-4 mb-1' for='username'>
-                                        Username
-                                    </label>
-                                    <div className='relative flex items-center'>
-                                        <div className='absolute mb-1 select-none left-2'>@</div>
-                                        <input className='w-full p-2 pl-6 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='username' type='text' />
-                                    </div>
-                                </div>
-
-                                <div className='w-full'>
-                                    <label className='block pr-4 mb-1' for='bio'>
-                                        Bio
-                                    </label>
-                                    <textarea className='min-h-[100px] w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='bio'></textarea>
+                            <div className='w-full'>
+                                <label className='block pr-4 mb-1' for='username'>
+                                    Username
+                                </label>
+                                <div className='relative flex items-center'>
+                                    <div className='absolute mb-1 select-none left-2'>@</div>
+                                    <input className='w-full p-2 pl-6 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='username' type='text' />
                                 </div>
                             </div>
+
+                            <div className='w-full'>
+                                <label className='block pr-4 mb-1' for='bio'>
+                                    Bio
+                                </label>
+                                <textarea className='min-h-[100px] w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='bio'></textarea>
+                            </div>
                         </section>
-                        <section className='flex flex-col gap-2 pb-2 bg-white md:bg-transparent'>
-                            <div className='flex items-center justify-between h-[36px] px-2 md:px-0'>
+
+                        <section className='flex flex-col gap-4 p-4 px-6 border-b md:border-gray-300 md:border md:rounded-xl'>
+                            <div className='flex items-center justify-between'>
                                 <p className='font-semibold text-md'>Theme</p>
                             </div>
-                            <div className='flex flex-col gap-4 px-2 bg-white md:p-6 rounded-xl'>
-                                <div className='w-full'>
-                                    <label className='block pr-4 mb-1' for='rba'>
-                                        RGB
-                                    </label>
-                                    <div className='flex gap-4'>
-                                        <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='rba' type='text' value={user.theme.join(', ')} />
-                                        <div className='w-12 h-10 rounded-md' style={{ backgroundColor: `rgb(${user.theme})` }}></div>
-                                    </div>
+                            <div className='w-full'>
+                                <label className='block pr-4 mb-1' for='rba'>
+                                    HEX Code
+                                </label>
+                                <div className='flex gap-4'>
+                                    <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='rba' type='text' value={user.theme} />
+                                    <div className='w-12 h-10 rounded-md' style={{ backgroundColor: `#${user.theme}` }}></div>
                                 </div>
                             </div>
                         </section>
 
-                        <section className='flex flex-col gap-2 py-2 bg-white md:bg-transparent'>
-                            <div className='flex items-center justify-between h-[36px] px-2 md:px-0'>
+                        <section className='flex flex-col gap-4 p-4 px-6 border-b md:border-gray-300 md:border md:rounded-xl'>
+                            <div className='flex items-center justify-between'>
                                 <p className='font-semibold text-md'>Socials</p>
-                                <button onClick={() => setSocialOpen(true)} className='px-3 py-1.5 mb-1 text-sm text-white transition rounded-full bg-secondary hover:bg-secondary-hover'>
+                                <button onClick={() => setSocialOpen(true)} className='px-3 py-1.5 text-sm text-white transition rounded-full bg-secondary hover:bg-secondary-hover'>
                                     Add social
                                 </button>
                             </div>
-                            <div className='flex flex-col gap-4 px-2 bg-white md:p-6 rounded-xl'>
-                                <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2'>
-                                    {user.socials.map((social) => {
-                                        return (
-                                            <div className='box-border flex flex-col w-full px-3 py-2 bg-gray-300 rounded-xl'>
-                                                <div className='flex items-center'>
-                                                    <Image src={`/${social.platform}-black.svg`} width='0' height='0' sizes='100%' className='w-6 h-6' />
-                                                    <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
-                                                        <p className='flex-grow mb-0.5 text-sm font-semibold basis-0'>{social.platform}</p>
-                                                        <p className='overflow-hidden text-xs text-ellipsis whitespace-nowrap'>@{social.username}</p>
-                                                    </div>
-                                                    <button onClick={() => setSocialOpen(true)} className='px-3 py-1.5 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>
-                                                        Edit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-
-                    <div className='box-border flex flex-col gap-4 mt-10 sm:mt-4 md:pl-5 md:w-6/12 md:mt-0'>
-                        <section className='flex flex-col gap-2 py-2 bg-white md:bg-transparent'>
-                            <div className='flex items-center justify-between h-[36px] px-2 md:px-0'>
-                                <p className='ml-2 font-semibold text-md'>Links</p>
-                                <button className='px-3 py-1.5 mb-1 text-sm text-white transition rounded-full bg-secondary hover:bg-secondary-hover'>Add link</button>
-                            </div>
-                            <div className='flex flex-col px-2 bg-white md:p-6 rounded-xl'>
-                                {user.links.map((link) => {
+                            <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2'>
+                                {user.socials.map((social) => {
                                     return (
-                                        <div className='flex flex-col px-2 py-4 bg-white border-b md:px-0 last:border-b-0'>
+                                        <div className='box-border flex flex-col w-full px-3 py-2 bg-gray-300 rounded-xl'>
                                             <div className='flex items-center'>
-                                                <Image src={`https://www.google.com/s2/favicons?domain=${link.favicon}&sz=64`} width='0' height='0' sizes='100%' className='w-10 h-10' />
+                                                <Image src={`/${social.platform}-black.svg`} width='0' height='0' sizes='100%' className='w-6 h-6' />
                                                 <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
-                                                    <p className='overflow-hidden text-sm font-semibold text-ellipsis whitespace-nowrap'>{link.title}</p>
-                                                    <p className='overflow-hidden text-xs text-ellipsis whitespace-nowrap'>{link.url}</p>
+                                                    <p className='flex-grow mb-0.5 text-sm font-semibold basis-0'>{social.platform}</p>
+                                                    <p className='overflow-hidden text-xs text-ellipsis whitespace-nowrap'>@{social.username}</p>
                                                 </div>
-                                                <div className='flex items-center gap-3 pl-2'>
-                                                    <Switch checked={enabled} onChange={setEnabled} className={`${enabled ? 'bg-green-600' : 'bg-gray-400'} relative inline-flex h-[19px] w-[37px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}>
-                                                        <span className='sr-only'>visible</span>
-                                                        <span aria-hidden='true' className={`${enabled ? 'translate-x-[1.125rem]' : 'translate-x-0'} pointer-events-none inline-block h-[15px] w-[15px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`} />
-                                                    </Switch>
-                                                    <button className='px-3 py-1.5 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>Edit</button>
-                                                </div>
+                                                <button onClick={() => setSocialOpen(true)} className='px-3 py-1.5 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>
+                                                    Edit
+                                                </button>
                                             </div>
                                         </div>
                                     );
                                 })}
                             </div>
+                        </section>
+                    </div>
+
+                    <div className='box-border flex flex-col md:pl-5 md:w-6/12 md:mt-0'>
+                        <section className='flex flex-col gap-4 p-4 px-6 md:border-gray-300 md:border md:rounded-xl'>
+                            <div className='flex items-center justify-between'>
+                                <p className='font-semibold text-md'>Links</p>
+                                <button className='px-3 py-1.5 text-sm text-white transition rounded-full bg-secondary hover:bg-secondary-hover'>Add link</button>
+                            </div>
+                            {user.links.map((link) => {
+                                return (
+                                    <div className='flex flex-col px-2 py-4 bg-white border-b md:px-0 last:border-b-0'>
+                                        <div className='flex items-center'>
+                                            <Image src={`https://www.google.com/s2/favicons?domain=${link.favicon}&sz=64`} width='0' height='0' sizes='100%' className='w-10 h-10' />
+                                            <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
+                                                <p className='overflow-hidden text-sm font-semibold text-ellipsis whitespace-nowrap'>{link.title}</p>
+                                                <p className='overflow-hidden text-xs text-ellipsis whitespace-nowrap'>{link.url}</p>
+                                            </div>
+                                            <div className='flex items-center gap-3 pl-2'>
+                                                <Switch checked={enabled} onChange={setEnabled} className={`${enabled ? 'bg-green-600' : 'bg-gray-400'} relative inline-flex h-[19px] w-[37px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}>
+                                                    <span className='sr-only'>visible</span>
+                                                    <span aria-hidden='true' className={`${enabled ? 'translate-x-[1.125rem]' : 'translate-x-0'} pointer-events-none inline-block h-[15px] w-[15px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`} />
+                                                </Switch>
+                                                <button className='px-3 py-1.5 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </section>
                     </div>
                 </section>

@@ -3,8 +3,8 @@ import Link from 'next/link';
 export default function SignIn() {
     return (
         <div className='min-h-screen overflow-hidden bg-white sm:bg-gray-100'>
-            <header className='z-40 w-screen bg-white border-b border-gray-200 '>
-                <nav className='flex items-center justify-between py-4 pl-2 pr-6 mx-auto max-w-7xl'>
+            <header className='z-40 w-full bg-white border-b border-gray-200 '>
+                <nav className='flex items-center justify-between px-6 py-4 mx-auto max-w-7xl'>
                     <div className='flex items-center flex-grow basis-0'>
                         <Link href='/' className='text-lg font-semibold tracking-wider text-primary'>
                             ProfileLink
