@@ -30,9 +30,9 @@ export default function Home() {
                     <div className='text-xl font-medium'>Effortlessly driving engagement and turning your audience into devoted fans.</div>
                 </div>
                 <div className='relative w-full sm:min-w-[40rem] group h-full'>
-                    <Image src='/hero-photo.jpg' width='0' height='0' sizes='100%' className='transition-all duration-150 absolute left-[10%] sm:left-[20%] w-3/6 sm:w-3/12 shadow-2xl min-h-full rounded-2xl sm:hover:scale-110 sm:hover:z-20 group-hover:left-[15%] rotate-[-6deg] sm:group-hover:mt-2' />
+                    <Image src='/hero-photo.jpg' width='0' height='0' sizes='100%' className='transition-all duration-150 absolute left-[10%] sm:left-[20%] w-3/6 sm:w-3/12 shadow-2xl min-h-full rounded-2xl sm:hover:scale-110 sm:hover:z-20 sm:group-hover:left-[15%] rotate-[-6deg] sm:group-hover:mt-2' />
                     <Image src='/hero-photo.jpg' width='0' height='0' sizes='100%' className='relative left-0 right-0 z-10 w-3/6 mx-auto transition-all duration-150 shadow-2xl sm:w-3/12 l h-fit rounded-2xl sm:hover:scale-110' />
-                    <Image src='/hero-photo.jpg' width='0' height='0' sizes='100%' className='transition-all duration-150 absolute right-[10%] sm:right-[20%] w-3/6 sm:w-3/12 shadow-2xl min-h-full rounded-2xl sm:hover:scale-110 sm:hover:z-20 rotate-6 sm:group-hover:mt-2 top-0 group-hover:right-[15%]' />
+                    <Image src='/hero-photo.jpg' width='0' height='0' sizes='100%' className='transition-all duration-150 absolute right-[10%] sm:right-[20%] w-3/6 sm:w-3/12 shadow-2xl min-h-full rounded-2xl sm:hover:scale-110 sm:hover:z-20 rotate-6 sm:group-hover:mt-2 top-0 sm:group-hover:right-[15%]' />
                 </div>
                 <div className='flex justify-center w-full gap-4 mb-10'>
                     <Link href='/sign-in'>
