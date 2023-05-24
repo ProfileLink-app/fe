@@ -203,7 +203,7 @@ export default function Edit() {
             </div>
 
             {/* Add/Update Social Account Modal */}
-            <Dialog open={socialModal.open} onClose={() => toggleSocialModal()} className='fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black bg-opacity-20'>
+            <Dialog open={socialModal.open} onClose={() => toggleSocialModal()} className='fixed top-0 left-0 z-50 flex items-start justify-center w-screen h-screen pt-20 bg-black md:pt-0 md:items-center bg-opacity-20'>
                 <Dialog.Panel className='box-border w-5/6 max-w-2xl p-6 mx-6 transition-all duration-150 bg-white sm:w-4/6 rounded-2xl sm:min-w-1/6'>
                     <Dialog.Title className='flex items-center justify-between mb-4 font-semibold text-md'>
                         {socialModal.platform.length > 0 ? `Edit ${socialModal.platform}` : 'Add New Social'}
@@ -235,7 +235,7 @@ export default function Edit() {
             </Dialog>
 
             {/* Add/Update Links Modal */}
-            <Dialog open={linkModal.open} onClose={() => toggleLinkModal()} className='fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black bg-opacity-20'>
+            <Dialog open={linkModal.open} onClose={() => toggleLinkModal()} className='fixed top-0 left-0 z-50 flex items-start justify-center w-screen h-screen pt-20 bg-black md:pt-0 md:items-center bg-opacity-20'>
                 <Dialog.Panel className='box-border w-5/6 max-w-2xl p-6 mx-6 transition-all duration-150 bg-white sm:w-4/6 rounded-2xl sm:min-w-1/6'>
                     <Dialog.Title className='flex items-center justify-between mb-4 font-semibold text-md'>
                         {linkModal.url.length > 0 ? `Edit Link` : 'Add New Link'}
