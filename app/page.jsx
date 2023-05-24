@@ -48,7 +48,7 @@ export default function Home() {
                     <p className='font-semibold tracking-wider text-md'>
                         ProfileLink
                     </p>
-                    <div className='text-xs'>© {new Date().getYear()} ProfileLink. All rights reserved</div>
+                    <div className='text-xs'>© 2023 ProfileLink. All rights reserved</div>
                 </div>
             </footer>
         </main>
