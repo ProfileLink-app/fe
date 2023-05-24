@@ -221,13 +221,13 @@ export default function Edit() {
 
                     <div className='flex gap-4 mt-8'>
                         {socialModal.platform.length > 0 ? (
-                            <button className='w-1/3 py-2 font-medium transition bg-gray-200 rounded-md select-none hover:bg-gray-300' onClick={() => toggleSocialModal()}>
+                            <button className='w-1/3 px-3 py-2 font-medium transition bg-gray-200 rounded-md select-none hover:bg-gray-300' onClick={() => toggleSocialModal()}>
                                 Remove
                             </button>
                         ) : (
                             ''
                         )}
-                        <button className='w-full py-2 font-medium text-white transition rounded-md select-none bg-primary hover:bg-primary-hover' onClick={() => toggleSocialModal()}>
+                        <button className='w-full px-3 py-2 font-medium text-white transition rounded-md select-none bg-primary hover:bg-primary-hover' onClick={() => toggleSocialModal()}>
                             Save
                         </button>
                     </div>
@@ -259,13 +259,13 @@ export default function Edit() {
 
                     <div className='flex gap-4 mt-8'>
                         {linkModal.url.length > 0 ? (
-                            <button className='w-1/3 py-2 font-medium transition bg-gray-200 rounded-md select-none hover:bg-gray-300' onClick={() => toggleLinkModal()}>
+                            <button className='w-1/3 px-3 py-2 font-medium transition bg-gray-200 rounded-md select-none hover:bg-gray-300' onClick={() => toggleLinkModal()}>
                                 Remove
                             </button>
                         ) : (
                             ''
                         )}
-                        <button className='w-full py-2 font-medium text-white transition rounded-md select-none bg-primary hover:bg-primary-hover' onClick={() => toggleLinkModal()}>
+                        <button className='w-full px-3 py-2 font-medium text-white transition rounded-md select-none bg-primary hover:bg-primary-hover' onClick={() => toggleLinkModal()}>
                             Save
                         </button>
                     </div>

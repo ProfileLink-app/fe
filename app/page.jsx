@@ -16,7 +16,7 @@ export default function Home() {
                             <button className='text-white hover:underline'>Sign In</button>
                         </Link>
                         <Link href='/sign-up'>
-                            <button className='px-3 py-1.5 text-sm text-white transition rounded-full bg-gray-700 hover:bg-gray-900'>Sign Up</button>
+                            <button className='px-3 py-1.5 text-sm text-white transition rounded-full bg-purple-800 hover:bg-purple-900'>Sign Up</button>
                         </Link>
                     </div>
                 </nav>
