@@ -22,7 +22,7 @@ export default function Home() {
                 </nav>
             </header>
             {/* Hero Section */}
-            <div className='flex flex-col items-start justify-start h-full min-h-screen gap-20 px-6 py-4 mx-auto max-w-7xl'>
+            <div className='flex flex-col items-start justify-start h-full gap-20 px-6 py-4 mx-auto max-w-7xl'>
                 <div className='flex flex-col items-center w-full mt-10 text-white sm:mt-20'>
                     <div className='mb-5 text-4xl font-bold'>
                         Unleash the power of your bio with <span className='font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-500'>ProfileLink</span>
@@ -34,7 +34,7 @@ export default function Home() {
                     <Image src='/hero-photo.jpg' width='0' height='0' sizes='100%' className='relative left-0 right-0 z-10 w-3/6 mx-auto transition-all duration-150 shadow-2xl sm:w-3/12 l h-fit rounded-2xl sm:hover:scale-110' />
                     <Image src='/hero-photo.jpg' width='0' height='0' sizes='100%' className='transition-all duration-150 absolute right-[10%] sm:right-[20%] w-3/6 sm:w-3/12 shadow-2xl min-h-full rounded-2xl sm:hover:scale-110 sm:hover:z-20 rotate-6 sm:group-hover:mt-2 top-0 sm:group-hover:right-[15%]' />
                 </div>
-                <div className='flex justify-center w-full gap-4 mb-10'>
+                <div className='flex justify-center w-full gap-4 mb-20'>
                     <Link href='/sign-in'>
                         <button className='px-6 py-2 text-xs font-semibold text-white transition-all duration-300 border rounded-md hover:border-gray-300 hover:text-gray-300 sm:text-sm md:text-base'>Sign In</button>
                     </Link>
@@ -43,6 +43,14 @@ export default function Home() {
                     </Link>
                 </div>
             </div>
+            <footer className='w-full bg-primary-hover'>
+                <div className='flex items-center justify-between p-6 mx-auto text-white max-w-7xl'>
+                    <p className='text-lg font-semibold tracking-wider'>
+                        ProfileLink
+                    </p>
+                    <div>© {new Date().getYear()} ProfileLink. All rights reserved</div>
+                </div>
+            </footer>
         </main>
     );
 }

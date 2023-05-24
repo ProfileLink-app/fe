@@ -1,0 +1,56 @@
+{
+    "name": "Dylan Baker",
+    "username": "dbvker",
+    "bio": "I'm Dylan, a full-stack web developer from Kansas City.",
+    "profilePic": "/profile-picture.jpg",
+    "theme": "0067E3",
+    "socials": [
+        {
+            "platform": "linkedin",
+            "username": "dylanmbaker",
+            "url": "https://www.linkedin.com/in/dylanmbaker/"
+        },
+        {
+            "platform": "github",
+            "username": "dbvker",
+            "url": "https://github.com/dbvker"
+        },
+        {
+            "platform": "website",
+            "username": "https://dylanbakerdev.com",
+            "url": "https://dylanbakerdev.com"
+        }
+    ],
+    "links": [
+        {
+            "title": "View my resume",
+            "url": "https://dylanbakerdev.com/static/media/Resume.b96d05d5389265c6f5cc.pdf",
+            "favicon": "https://dylanbakerdev.com",
+            "active": true
+        },
+        {
+            "title": "Project - Task App",
+            "url": "https://todo-app-dylan.netlify.app/",
+            "favicon": "https://dylanbakerdev.com",
+            "active": true
+        },
+        {
+            "title": "Project - Restaurant Menu",
+            "url": "https://restaurant-menu-db.netlify.app/",
+            "favicon": "https://dylanbakerdev.com",
+            "active": true
+        },
+        {
+            "title": "This projects front-end code",
+            "url": "https://github.com/ProfileLink-app/fe",
+            "favicon": "https://github.com",
+            "active": true
+        },
+        {
+            "title": "This projects back-end code",
+            "url": "https://github.com/ProfileLink-app/be",
+            "favicon": "https://github.com",
+            "active": true
+        }
+    ]
+}
