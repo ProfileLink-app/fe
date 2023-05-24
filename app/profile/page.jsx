@@ -54,7 +54,7 @@ export default function Profile() {
                     </div>
                 </nav>
             </header>
-            <div className='relative top-0 flex flex-col h-full pb-10 mx-auto max-w-7xl'>
+            <div className='relative top-0 flex flex-col h-full px-6 pb-10 mx-auto max-w-7xl'>
                 <section className='flex flex-col items-center' style={COLOR_CALC > 186 ? { color: '#4B5563' } : { color: '#FFFFFF' }}>
                     <Image src={profileData.profilePic} width='0' height='0' sizes='100%' className='w-24 h-24 mb-6 rounded-full bg-slate-950 bg-opacity-30' />
                     <h1 className='mb-2 text-xl font-bold'>{profileData.name}</h1>
@@ -71,7 +71,7 @@ export default function Profile() {
                         })}
                     </div>
 
-                    <div className='flex flex-col w-full gap-4 px-4 mt-10 sm:max-w-3xl'>
+                    <div className='flex flex-col w-full gap-4 mt-10 sm:max-w-3xl'>
                         {profileData.links
                             .filter((link) => link.active)
                             .map((link, key) => {
