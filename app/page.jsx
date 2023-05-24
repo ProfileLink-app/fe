@@ -45,10 +45,10 @@ export default function Home() {
             </div>
             <footer className='w-full bg-primary-hover'>
                 <div className='flex items-center justify-between p-6 mx-auto text-white max-w-7xl'>
-                    <p className='text-lg font-semibold tracking-wider'>
+                    <p className='font-semibold tracking-wider text-md'>
                         ProfileLink
                     </p>
-                    <div>© {new Date().getYear()} ProfileLink. All rights reserved</div>
+                    <div className='text-xs'>© {new Date().getYear()} ProfileLink. All rights reserved</div>
                 </div>
             </footer>
         </main>
