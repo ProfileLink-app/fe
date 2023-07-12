@@ -1,26 +1,15 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+// Components
+const HeaderComponent = dynamic(() => import('../components/header'));
 
 export default function Home() {
     return (
         <main className='min-h-screen bg-primary'>
-            <header className='z-40 w-full'>
-                <nav className='flex items-center justify-between px-6 py-4 mx-auto max-w-7xl'>
-                    <div className='flex items-center flex-grow basis-0'>
-                        <Link href='/' className='text-lg font-semibold tracking-wider text-white'>
-                            ProfileLink
-                        </Link>
-                    </div>
-                    <div className='flex items-center justify-end gap-4'>
-                        <Link href='/sign-in'>
-                            <button className='text-white hover:underline'>Sign In</button>
-                        </Link>
-                        <Link href='/sign-up'>
-                            <button className='px-3 py-1.5 text-sm text-white transition rounded-full bg-purple-800 hover:bg-purple-900'>Sign Up</button>
-                        </Link>
-                    </div>
-                </nav>
-            </header>
+            <HeaderComponent transparent={true} fontColor='#FFFFFF' />
             {/* Hero Section */}
             <div className='flex flex-col items-start justify-start h-full gap-20 px-6 py-4 mx-auto max-w-7xl'>
                 <div className='flex flex-col items-center w-full mt-10 text-white sm:mt-20'>
@@ -45,9 +34,7 @@ export default function Home() {
             </div>
             <footer className='w-full bg-primary-hover'>
                 <div className='flex items-center justify-between p-6 mx-auto text-white max-w-7xl'>
-                    <p className='font-semibold tracking-wider text-md'>
-                        ProfileLink
-                    </p>
+                    <p className='font-semibold tracking-wider text-md'>ProfileLink</p>
                     <div className='text-xs'>© 2023 ProfileLink. All rights reserved</div>
                 </div>
             </footer>
