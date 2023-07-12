@@ -11,7 +11,7 @@ const AboutComponent = dynamic(() => import('../../components/about'));
 const SocialsComponent = dynamic(() => import('../../components/socials'));
 const LinksComponent = dynamic(() => import('../../components/links'));
 
-export default function Edit() {
+export default function Account() {
     const [userInfo, setUserInfo] = useState({});
     const { push } = useRouter();
 
@@ -21,7 +21,7 @@ export default function Edit() {
     userId = decoded.sub;
     const getData = () => {
         if (localStorage.getItem('token') == null) {
-            // push('/');
+            push('/');
         } else {
             axios.get(`https://localhost:7101/api/users/${userId}`, { headers: { 'Authorization': `Bearer ${token}` } }).then((resp) => {
                 setUserInfo(resp.data);
