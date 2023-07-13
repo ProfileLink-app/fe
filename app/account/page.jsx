@@ -15,17 +15,21 @@ export default function Account() {
     const [userInfo, setUserInfo] = useState({});
     const { push } = useRouter();
 
-    let token, userId;
-    token = localStorage.getItem('token');
-    const decoded = jwt_decode(token);
-    userId = decoded.sub;
+    const getToken = () => {
+        if (typeof window !== 'undefined') return window.localStorage.getItem("token");
+    }
+    const token = getToken();
+    let userId;
     const getData = () => {
-        if (localStorage.getItem('token') == null) {
+        if (token == null) {
+            localStorage.removeItem("token");
             push('/');
         } else {
+            const decoded = jwt_decode(token);
+            userId = decoded.sub;
             axios.get(`https://localhost:7101/api/users/${userId}`, { headers: { 'Authorization': `Bearer ${token}` } }).then((resp) => {
                 setUserInfo(resp.data);
-            });
+            }).catch(error => console.log(error));
         }
     };
 
