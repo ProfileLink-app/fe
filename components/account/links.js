@@ -2,9 +2,16 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { Switch, Dialog } from '@headlessui/react';
 
+import profileImage from '../../public/profileData.json';
+
+// Components
+const LinksSkeletonComponent = dynamic(() => import('../skeletons/links'));
+
 export default function LinksComponent({ userInfo, token, getData }) {
+    const [fieldsError, setFieldsError] = useState(false);
     const [linkModal, setLinkModal] = useState({
         open: false,
         edit: false,
@@ -15,6 +22,7 @@ export default function LinksComponent({ userInfo, token, getData }) {
 
     const toggleLinkModal = (edit, id, title = '', url = '') => {
         setLinkModal({ open: !linkModal.open, edit, linkId: id, title, url });
+        setFieldsError(false);
     };
 
     const handleAddLink = () => {
@@ -24,15 +32,19 @@ export default function LinksComponent({ userInfo, token, getData }) {
                 toggleLinkModal();
             });
         } else {
-            console.log('Fields wrong');
+            setFieldsError(true);
         }
     };
 
     const handleEditLink = () => {
-        axios.put(`https://localhost:7101/api/links/${linkModal.linkId}`, { title: linkModal.title, url: linkModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
-            getData();
-            toggleLinkModal();
-        });
+        if (linkModal.title.length > 1 && linkModal.url.length > 1) {
+            axios.put(`https://localhost:7101/api/links/${linkModal.linkId}`, { title: linkModal.title, url: linkModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
+                getData();
+                toggleLinkModal();
+            });
+        } else {
+            setFieldsError(true);
+        }
     };
 
     const handleRemoveLink = () => {
@@ -65,7 +77,13 @@ export default function LinksComponent({ userInfo, token, getData }) {
                                     return (
                                         <div key={key} className='flex flex-col px-2 py-4 bg-white border-b md:px-0 last:border-b-0'>
                                             <div className='flex items-center'>
-                                                <Image src={`https://www.google.com/s2/favicons?domain=${link.url}&sz=64`} width='0' height='0' sizes='100%' className='w-10 h-10' />
+                                                <Image
+                                                    src={`https://www.google.com/s2/favicons?domain=${link.url}&sz=64` || {profileImage}}
+                                                    width='0'
+                                                    height='0'
+                                                    sizes='100%'
+                                                    className='w-10 h-10 bg-gray-200 border-0 rounded-md'
+                                                />
                                                 <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
                                                     <p className='overflow-hidden text-sm font-semibold text-ellipsis whitespace-nowrap'>{link.title}</p>
                                                     <p className='overflow-hidden text-xs text-ellipsis whitespace-nowrap'>{link.url}</p>
@@ -99,17 +117,39 @@ export default function LinksComponent({ userInfo, token, getData }) {
                                 </div>
                             </Dialog.Title>
 
-                            <div className='w-full mt-6'>
+                            <div className='relative w-full mt-6 '>
                                 <label className='block pr-4 mb-1.5 font-medium text-sm' for='title'>
                                     Title:
                                 </label>
-                                <input id='title' type='text' name='title' value={linkModal.title} onChange={(e) => setLinkModal({ ...linkModal, [e.target.name]: e.target.value })} className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='title' type='text' />
+                                <input
+                                    id='title'
+                                    type='text'
+                                    name='title'
+                                    value={linkModal.title}
+                                    onChange={(e) => {
+                                        setLinkModal({ ...linkModal, [e.target.name]: e.target.value });
+                                        setFieldsError(false);
+                                    }}
+                                    className={fieldsError ? 'text-red-400 w-full p-2 leading-tight transition bg-white border border-red-400 rounded-md appearance-none focus:outline-none' : 'w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400'}
+                                />
+                                <div className='absolute top-0 right-0 text-sm font-semibold text-red-400 transition'>{fieldsError ? 'Required' : ''}</div>
                             </div>
-                            <div className='w-full mt-6'>
+                            <div className='relative w-full mt-6'>
                                 <label className='block pr-4 mb-1.5 font-medium text-sm' for='url'>
                                     URL:
                                 </label>
-                                <input id='url' type='url' name='url' value={linkModal.url} onChange={(e) => setLinkModal({ ...linkModal, [e.target.name]: e.target.value })} className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='url' type='text' />
+                                <input
+                                    id='url'
+                                    type='url'
+                                    name='url'
+                                    value={linkModal.url}
+                                    onChange={(e) => {
+                                        setLinkModal({ ...linkModal, [e.target.name]: e.target.value });
+                                        setFieldsError(false);
+                                    }}
+                                    className={fieldsError ? 'text-red-400 w-full p-2 leading-tight transition bg-white border border-red-400 rounded-md appearance-none focus:outline-none' : 'w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400'}
+                                />
+                                <div className='absolute top-0 right-0 text-sm font-semibold text-red-400 transition'>{fieldsError ? 'Required' : ''}</div>
                             </div>
 
                             <div className='flex gap-4 mt-8'>
@@ -128,78 +168,7 @@ export default function LinksComponent({ userInfo, token, getData }) {
                     </Dialog>
                 </>
             ) : (
-                <section className='flex flex-col gap-4 p-4 px-6 border-b border-gray-200 md:border md:rounded-xl animate-pulse dark:border-gray-300'>
-                    <div className='flex items-center justify-between'>
-                        <div class='h-6 mb-2 bg-gray-200 rounded-full dark:bg-gray-300 w-32' />
-                        <div className='h-8 bg-gray-200 rounded-md w-14 dark:bg-gray-300' />
-                    </div>
-
-                    <div className='flex flex-col h-[4.5rem] justify-center border-b border-gray-200 md:px-0 last:border-b-0 dark:border-gray-300'>
-                        <div className='flex items-center'>
-                            <div className='w-10 h-10 bg-gray-200 rounded-md dark:bg-gray-300' />
-                            <div className='flex flex-col flex-grow px-4 lg:px-2'>
-                                <div className='w-20 h-4 mb-1 bg-gray-200 rounded-full dark:bg-gray-300' />
-                                <div className='h-3 bg-gray-200 rounded-full w-28 dark:bg-gray-300' />
-                            </div>
-                            <div className='flex items-center gap-3 pl-2'>
-                                <div className='h-5 w-[2.25rem] bg-gray-200 dark:bg-gray-300 rounded-full' />
-                                <div className='h-8 w-[3.125rem] rounded-md bg-gray-200 dark:bg-gray-300' />
-                            </div>
-                        </div>
-                    </div>
-                    <div className='flex flex-col h-[4.5rem] justify-center border-b border-gray-200 md:px-0 last:border-b-0 dark:border-gray-300'>
-                        <div className='flex items-center'>
-                            <div className='w-10 h-10 bg-gray-200 rounded-md dark:bg-gray-300' />
-                            <div className='flex flex-col flex-grow px-4 lg:px-2'>
-                                <div className='w-20 h-4 mb-1 bg-gray-200 rounded-full dark:bg-gray-300' />
-                                <div className='h-3 bg-gray-200 rounded-full w-28 dark:bg-gray-300' />
-                            </div>
-                            <div className='flex items-center gap-3 pl-2'>
-                                <div className='h-5 w-[2.25rem] bg-gray-200 dark:bg-gray-300 rounded-full' />
-                                <div className='h-8 w-[3.125rem] rounded-md bg-gray-200 dark:bg-gray-300' />
-                            </div>
-                        </div>
-                    </div>
-					<div className='flex flex-col h-[4.5rem] justify-center border-b border-gray-200 md:px-0 last:border-b-0 dark:border-gray-300'>
-                        <div className='flex items-center'>
-                            <div className='w-10 h-10 bg-gray-200 rounded-md dark:bg-gray-300' />
-                            <div className='flex flex-col flex-grow px-4 lg:px-2'>
-                                <div className='w-20 h-4 mb-1 bg-gray-200 rounded-full dark:bg-gray-300' />
-                                <div className='h-3 bg-gray-200 rounded-full w-28 dark:bg-gray-300' />
-                            </div>
-                            <div className='flex items-center gap-3 pl-2'>
-                                <div className='h-5 w-[2.25rem] bg-gray-200 dark:bg-gray-300 rounded-full' />
-                                <div className='h-8 w-[3.125rem] rounded-md bg-gray-200 dark:bg-gray-300' />
-                            </div>
-                        </div>
-                    </div>
-					<div className='flex flex-col h-[4.5rem] justify-center border-b border-gray-200 md:px-0 last:border-b-0 dark:border-gray-300'>
-                        <div className='flex items-center'>
-                            <div className='w-10 h-10 bg-gray-200 rounded-md dark:bg-gray-300' />
-                            <div className='flex flex-col flex-grow px-4 lg:px-2'>
-                                <div className='w-20 h-4 mb-1 bg-gray-200 rounded-full dark:bg-gray-300' />
-                                <div className='h-3 bg-gray-200 rounded-full w-28 dark:bg-gray-300' />
-                            </div>
-                            <div className='flex items-center gap-3 pl-2'>
-                                <div className='h-5 w-[2.25rem] bg-gray-200 dark:bg-gray-300 rounded-full' />
-                                <div className='h-8 w-[3.125rem] rounded-md bg-gray-200 dark:bg-gray-300' />
-                            </div>
-                        </div>
-                    </div>
-					<div className='flex flex-col h-[4.5rem] justify-center border-b border-gray-200 md:px-0 last:border-b-0 dark:border-gray-300'>
-                        <div className='flex items-center'>
-                            <div className='w-10 h-10 bg-gray-200 rounded-md dark:bg-gray-300' />
-                            <div className='flex flex-col flex-grow px-4 lg:px-2'>
-                                <div className='w-20 h-4 mb-1 bg-gray-200 rounded-full dark:bg-gray-300' />
-                                <div className='h-3 bg-gray-200 rounded-full w-28 dark:bg-gray-300' />
-                            </div>
-                            <div className='flex items-center gap-3 pl-2'>
-                                <div className='h-5 w-[2.25rem] bg-gray-200 dark:bg-gray-300 rounded-full' />
-                                <div className='h-8 w-[3.125rem] rounded-md bg-gray-200 dark:bg-gray-300' />
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <LinksSkeletonComponent />
             )}
         </>
     );

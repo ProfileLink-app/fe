@@ -2,34 +2,53 @@
 import { useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { Dialog } from '@headlessui/react';
+
+// Components
+const SocialsSkeletonComponent = dynamic(() => import('../skeletons/socials'));
 
 export default function SocialsComponent({ userInfo, token, getData }) {
     const socialPlatforms = ['Facebook', 'GitHub', 'Instagram', 'LinkedIn', 'Snapchat', 'Threads', 'TikTok', 'Twitch', 'Twitter', 'Website', 'YouTube'];
+    const [fieldsError, setFieldsError] = useState(false);
     const [socialModal, setSocialModal] = useState({
         open: false,
         edit: false,
         socialId: null,
         platform: '',
         username: '',
+        url: '',
     });
 
-    const toggleSocialModal = (edit, id, platform = socialPlatforms[0], username = '') => {
-        setSocialModal({ open: !socialModal.open, edit, socialId: id, platform, username });
+    const toggleSocialModal = (edit, id, platform = socialPlatforms[0], username = '', url = '') => {
+        setSocialModal({ open: !socialModal.open, edit, socialId: id, platform, username, url });
+        setFieldsError(false);
     };
 
     const handleAddSocial = () => {
-        axios.post(`https://localhost:7101/api/socials?userId=${userInfo.userId}`, { platform: socialModal.platform, username: socialModal.username }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
-            getData();
-            toggleSocialModal();
-        });
+        if ((socialModal.platform == 'Website' && socialModal.url.length > 0) || (socialModal.username.length > 0 && socialModal.url.length > 0)) {
+            axios.post(`https://localhost:7101/api/socials?userId=${userInfo.userId}`, { platform: socialModal.platform, username: socialModal.username, url: socialModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
+                getData();
+                toggleSocialModal();
+            });
+        } else {
+            setFieldsError(true);
+        }
     };
 
     const handleEditSocial = () => {
-        axios.put(`https://localhost:7101/api/socials/${socialModal.socialId}`, { platform: socialModal.platform, username: socialModal.username }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
-            getData();
-            toggleSocialModal();
-        });
+        console.log(socialModal.platform);
+        console.log(socialModal.username);
+        console.log(socialModal.url);
+        if (socialModal.username.length > 0) {
+            axios.put(`https://localhost:7101/api/socials/${socialModal.socialId}`, { platform: socialModal.platform, username: socialModal.username, url: socialModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
+                console.log('axios');
+                getData();
+                toggleSocialModal();
+            });
+        } else {
+            setFieldsError(true);
+        }
     };
 
     const handleRemoveSocial = () => {
@@ -62,11 +81,10 @@ export default function SocialsComponent({ userInfo, token, getData }) {
                                                         <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
                                                             <p className='flex-grow mb-0.5 text-sm font-semibold basis-0'>{social.platform}</p>
                                                             <p className='flex gap-1 overflow-hidden text-xs text-ellipsis whitespace-nowrap'>
-                                                                <p>{social.platform !== 'website' && <>@</>}</p>
-                                                                <p>{social.username}</p>
+                                                                <p>{social.platform == 'Website' ? social.url : `@${social.username}`}</p>
                                                             </p>
                                                         </div>
-                                                        <button onClick={() => toggleSocialModal(true, social.socialId, social.platform, social.username)} className='px-3 py-1.5 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>
+                                                        <button onClick={() => toggleSocialModal(true, social.socialId, social.platform, social.username, social.url)} className='px-3 py-1.5 text-sm font-medium transition bg-gray-200 rounded-md h-min hover:bg-gray-300'>
                                                             Edit
                                                         </button>
                                                     </div>
@@ -105,11 +123,43 @@ export default function SocialsComponent({ userInfo, token, getData }) {
                                 ''
                             )}
 
-                            <div className='w-full mt-6'>
+                            {socialModal.platform != 'Website' && (
+                                <div className='relative w-full mt-6'>
+                                    <label className='block pr-4 mb-1.5 font-medium text-sm' for='username'>
+                                        Username:
+                                    </label>
+                                    <input
+                                        id='username'
+                                        type='text'
+                                        name='username'
+                                        value={socialModal.username}
+                                        onChange={(e) => {
+                                            setSocialModal({ ...socialModal, [e.target.name]: e.target.value });
+                                            setFieldsError(false);
+                                        }}
+                                        className={fieldsError ? 'text-red-400 w-full p-2 leading-tight transition bg-white border border-red-400 rounded-md appearance-none focus:outline-none' : 'w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400'}
+                                    />
+                                    <div className='absolute top-0 right-0 text-sm font-semibold text-red-400 transition'>{fieldsError ? 'Required' : ''}</div>
+                                </div>
+                            )}
+
+                            <div className='relative w-full mt-6'>
                                 <label className='block pr-4 mb-1.5 font-medium text-sm' for='username'>
-                                    {socialModal.platform === 'Website' ? 'URL:' : 'Username:'}
+                                    URL:
                                 </label>
-                                <input id='username' type='text' name='username' value={socialModal.username} onChange={(e) => setSocialModal({ ...socialModal, [e.target.name]: e.target.value })} className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' />
+                                <input
+                                    id='url'
+                                    type='text'
+                                    name='url'
+                                    value={socialModal.url}
+                                    placeholder='https://www.website.com/username'
+                                    onChange={(e) => {
+                                        setSocialModal({ ...socialModal, [e.target.name]: e.target.value });
+                                        setFieldsError(false);
+                                    }}
+                                    className={fieldsError ? 'text-red-400 w-full p-2 leading-tight transition bg-white border border-red-400 rounded-md appearance-none focus:outline-none' : 'w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400'}
+                                />
+                                <div className='absolute top-0 right-0 text-sm font-semibold text-red-400 transition'>{fieldsError ? 'Required' : ''}</div>
                             </div>
 
                             <div className='flex gap-4 mt-8'>
@@ -128,45 +178,7 @@ export default function SocialsComponent({ userInfo, token, getData }) {
                     </Dialog>
                 </>
             ) : (
-                <section className='flex flex-col gap-4 p-4 px-6 border-b border-gray-200 md:border md:rounded-xl animate-pulse dark:border-gray-300'>
-                    <div className='flex items-center justify-between'>
-                        <div class='h-6 mb-2 bg-gray-200 rounded-full dark:bg-gray-300 w-32' />
-                        <div className='h-8 bg-gray-200 rounded-md w-14 dark:bg-gray-300' />
-                    </div>
-
-                    <div className='flex flex-col w-full rounded-xl h-[3.375rem] px-3 justify-center border-gray-200 dark:border-gray-300 border'>
-                        <div className='flex items-center'>
-                            <div className='w-6 h-6 bg-gray-200 rounded-full dark:bg-gray-300' />
-                            <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
-                                <div className='w-20 h-4 mb-1 bg-gray-200 rounded-full dark:bg-gray-300' />
-                                <div className='h-3 bg-gray-200 rounded-full w-28 dark:bg-gray-300' />
-                            </div>
-                            <div className='w-12 h-8 bg-gray-200 rounded-md dark:bg-gray-300' />
-                        </div>
-                    </div>
-
-                    <div className='flex flex-col w-full rounded-xl h-[3.375rem] px-3 justify-center border-gray-200 dark:border-gray-300 border'>
-                        <div className='flex items-center'>
-                            <div className='w-6 h-6 bg-gray-200 rounded-full dark:bg-gray-300' />
-                            <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
-                                <div className='w-20 h-4 mb-1 bg-gray-200 rounded-full dark:bg-gray-300' />
-                                <div className='h-3 bg-gray-200 rounded-full w-28 dark:bg-gray-300' />
-                            </div>
-                            <div className='w-12 h-8 bg-gray-200 rounded-md dark:bg-gray-300' />
-                        </div>
-                    </div>
-
-                    <div className='flex flex-col w-full rounded-xl h-[3.375rem] px-3 justify-center border-gray-200 dark:border-gray-300 border'>
-                        <div className='flex items-center'>
-                            <div className='w-6 h-6 bg-gray-200 rounded-full dark:bg-gray-300' />
-                            <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
-                                <div className='w-20 h-4 mb-1 bg-gray-200 rounded-full dark:bg-gray-300' />
-                                <div className='h-3 bg-gray-200 rounded-full w-28 dark:bg-gray-300' />
-                            </div>
-                            <div className='w-12 h-8 bg-gray-200 rounded-md dark:bg-gray-300' />
-                        </div>
-                    </div>
-                </section>
+                <SocialsSkeletonComponent />
             )}
         </>
     );
