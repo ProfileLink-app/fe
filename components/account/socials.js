@@ -59,7 +59,7 @@ export default function SocialsComponent({ userInfo, token, getData }) {
     };
     return (
         <>
-            {userInfo.userId ? (
+            {userInfo.userId != undefined ? (
                 <>
                     <section className='flex flex-col gap-4 p-4 px-6 border-b md:border-gray-300 md:border md:rounded-xl'>
                         <div className='flex items-center justify-between'>

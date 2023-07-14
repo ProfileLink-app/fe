@@ -65,7 +65,7 @@ export default function LinksComponent({ userInfo, token, getData }) {
 
     return (
         <>
-            {userInfo.userId ? (
+            {userInfo.userId != undefined ? (
                 <>
                     <div className='flex flex-col md:mt-0'>
                         <section className='flex flex-col gap-4 p-4 px-6 md:border-gray-300 md:border md:rounded-xl'>
@@ -140,6 +140,7 @@ export default function LinksComponent({ userInfo, token, getData }) {
                                     type='url'
                                     name='url'
                                     value={linkModal.url}
+                                    placeholder='https://www.website.com/'
                                     onChange={(e) => {
                                         setLinkModal({ ...linkModal, [e.target.name]: e.target.value });
                                         setFieldsError(false);
