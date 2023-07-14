@@ -1,9 +1,11 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import jwt_decode from 'jwt-decode';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
+import { getToken } from '../utils/getToken';
 
 // Components
 const HeaderComponent = dynamic(() => import('../../components/header'));
@@ -12,6 +14,7 @@ export default function SignIn() {
     const { push } = useRouter();
     const [credentials, setCredentials] = useState({ username: '', password: '' });
     const [loginError, setLoginError] = useState('');
+    const token = getToken();
 
     const handleChanges = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -19,19 +22,37 @@ export default function SignIn() {
 
     const signInUser = (e) => {
         e.preventDefault();
+        console.log(1)
         axios
-            .post(`https://localhost:7101/api/authentication`, {
+            .post(`https://profilelinkapp.azurewebsites.net/api/authentication`, {
                 username: credentials.username,
                 password: credentials.password,
             })
             .then((resp) => {
+                console.log(resp)
                 localStorage.setItem('token', resp.data);
                 push('/account');
             })
             .catch((error) => {
+                console.log(error)
                 setLoginError('Username or password is incorrect.');
             });
     };
+
+    const getUserData = () => {
+        if (token != null) {
+            const decoded = jwt_decode(token);
+            const userId = decoded.sub;
+            axios
+                .get(`https://profilelinkapp.azurewebsites.net/api/users/${userId}`, { headers: { 'Authorization': `Bearer ${token}` } })
+                .then((resp) => push('/account'))
+                .catch((error) => console.log(error));
+        }
+    };
+
+    useEffect(() => {
+        getUserData();
+    }, [token]);
 
     return (
         <div className='min-h-screen overflow-hidden bg-white sm:bg-gray-100'>

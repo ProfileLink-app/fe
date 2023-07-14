@@ -27,7 +27,7 @@ export default function LinksComponent({ userInfo, token, getData }) {
 
     const handleAddLink = () => {
         if (linkModal.title.length > 1 && linkModal.url.length > 1) {
-            axios.post(`https://localhost:7101/api/links?userId=${userInfo.userId}`, { title: linkModal.title, url: linkModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
+            axios.post(`https://profilelinkapp.azurewebsites.net/api/links?userId=${userInfo.userId}`, { title: linkModal.title, url: linkModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
                 getData();
                 toggleLinkModal();
             });
@@ -38,7 +38,7 @@ export default function LinksComponent({ userInfo, token, getData }) {
 
     const handleEditLink = () => {
         if (linkModal.title.length > 1 && linkModal.url.length > 1) {
-            axios.put(`https://localhost:7101/api/links/${linkModal.linkId}`, { title: linkModal.title, url: linkModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
+            axios.put(`https://profilelinkapp.azurewebsites.net/api/links/${linkModal.linkId}`, { title: linkModal.title, url: linkModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
                 getData();
                 toggleLinkModal();
             });
@@ -48,16 +48,19 @@ export default function LinksComponent({ userInfo, token, getData }) {
     };
 
     const handleRemoveLink = () => {
-        axios.delete(`https://localhost:7101/api/links/${linkModal.linkId}`, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
+        axios.delete(`https://profilelinkapp.azurewebsites.net/api/links/${linkModal.linkId}`, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
             getData();
             toggleLinkModal();
         });
     };
 
     const handleLinkActive = (id) => {
-        axios.put(`https://localhost:7101/api/links/active/${id}`).then(() => {
-            getData();
-        });
+        axios
+            .put(`https://profilelinkapp.azurewebsites.net/api/links/active/${id}`, { headers: { 'Authorization': `Bearer ${token}` } })
+            .then(() => {
+                getData();
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -77,13 +80,7 @@ export default function LinksComponent({ userInfo, token, getData }) {
                                     return (
                                         <div key={key} className='flex flex-col px-2 py-4 bg-white border-b md:px-0 last:border-b-0'>
                                             <div className='flex items-center'>
-                                                <Image
-                                                    src={`https://www.google.com/s2/favicons?domain=${link.url}&sz=64` || {profileImage}}
-                                                    width='0'
-                                                    height='0'
-                                                    sizes='100%'
-                                                    className='w-10 h-10 bg-gray-200 border-0 rounded-md'
-                                                />
+                                                <Image src={`https://www.google.com/s2/favicons?domain=${link.url}&sz=64` || { profileImage }} width='0' height='0' sizes='100%' className='w-10 h-10 bg-gray-200 border-0 rounded-md' />
                                                 <div className='flex flex-col flex-grow px-4 overflow-hidden lg:px-2 basis-1'>
                                                     <p className='overflow-hidden text-sm font-semibold text-ellipsis whitespace-nowrap'>{link.title}</p>
                                                     <p className='overflow-hidden text-xs text-ellipsis whitespace-nowrap'>{link.url}</p>
@@ -111,7 +108,7 @@ export default function LinksComponent({ userInfo, token, getData }) {
                     <Dialog open={linkModal.open} onClose={() => toggleLinkModal()} className='fixed top-0 left-0 z-50 flex items-start justify-center w-screen h-screen pt-20 bg-black md:pt-0 md:items-center bg-opacity-20'>
                         <Dialog.Panel className='box-border w-5/6 max-w-2xl p-6 mx-6 transition-all duration-150 bg-white sm:w-4/6 rounded-2xl sm:min-w-1/6'>
                             <Dialog.Title className='flex items-center justify-between mb-4 font-semibold text-md'>
-                                {linkModal.url.length > 0 && linkModal.edit == true ? `Edit Link` : 'Add New Link'}
+                                {linkModal.edit == true ? `Edit Link` : 'Add New Link'}
                                 <div onClick={() => toggleLinkModal()} className='p-2 transition bg-gray-200 rounded-md cursor-pointer select-none hover:bg-gray-300'>
                                     <Image src='/closebtn.svg' width='0' height='0' sizes='100%' className='w-4 h-4' />
                                 </div>
@@ -153,7 +150,7 @@ export default function LinksComponent({ userInfo, token, getData }) {
                             </div>
 
                             <div className='flex gap-4 mt-8'>
-                                {linkModal.url.length > 0 && linkModal.edit == true ? (
+                                {linkModal.edit == true ? (
                                     <button onClick={() => handleRemoveLink()} className='w-1/3 px-3 py-2 font-medium transition bg-gray-200 rounded-md select-none hover:bg-gray-300'>
                                         Remove
                                     </button>

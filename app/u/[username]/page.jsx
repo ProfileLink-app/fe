@@ -22,7 +22,7 @@ export default function Profile({ params }) {
 
     function getProfileData() {
         axios
-            .get(`https://localhost:7101/api/users/profile/${username}`)
+            .get(`https://profilelinkapp.azurewebsites.net/api/users/profile/${username}`)
             .then((resp) => {
                 if (resp.status == 200) {
                     setProfileData(resp.data);
@@ -39,7 +39,7 @@ export default function Profile({ params }) {
             const decoded = jwt_decode(token);
             const userId = decoded.sub;
             axios
-                .get(`https://localhost:7101/api/users/${userId}`, { headers: { 'Authorization': `Bearer ${token}` } })
+                .get(`https://profilelinkapp.azurewebsites.net/api/users/${userId}`, { headers: { 'Authorization': `Bearer ${token}` } })
                 .then((resp) => {
                     setUserInfo(resp.data);
                 })

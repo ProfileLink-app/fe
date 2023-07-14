@@ -15,7 +15,6 @@ const LinksComponent = dynamic(() => import('../../components/account/links'));
 export default function Account() {
     const { push } = useRouter();
     const [userInfo, setUserInfo] = useState({});
-    console.log(userInfo)
     const token = getToken();
     
     const getUserData = () => {
@@ -26,7 +25,7 @@ export default function Account() {
             const decoded = jwt_decode(token);
             const userId = decoded.sub;
             axios
-                .get(`https://localhost:7101/api/users/${userId}`, { headers: { 'Authorization': `Bearer ${token}` } })
+                .get(`https://profilelinkapp.azurewebsites.net/api/users/${userId}`, { headers: { 'Authorization': `Bearer ${token}` } })
                 .then((resp) => setUserInfo(resp.data))
                 .catch((error) => console.log(error));
         }

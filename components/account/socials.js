@@ -27,7 +27,7 @@ export default function SocialsComponent({ userInfo, token, getData }) {
 
     const handleAddSocial = () => {
         if ((socialModal.platform == 'Website' && socialModal.url.length > 0) || (socialModal.username.length > 0 && socialModal.url.length > 0)) {
-            axios.post(`https://localhost:7101/api/socials?userId=${userInfo.userId}`, { platform: socialModal.platform, username: socialModal.username, url: socialModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
+            axios.post(`https://profilelinkapp.azurewebsites.net/api/socials?userId=${userInfo.userId}`, { platform: socialModal.platform, username: socialModal.username, url: socialModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
                 getData();
                 toggleSocialModal();
             });
@@ -41,7 +41,7 @@ export default function SocialsComponent({ userInfo, token, getData }) {
         console.log(socialModal.username);
         console.log(socialModal.url);
         if (socialModal.username.length > 0) {
-            axios.put(`https://localhost:7101/api/socials/${socialModal.socialId}`, { platform: socialModal.platform, username: socialModal.username, url: socialModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
+            axios.put(`https://profilelinkapp.azurewebsites.net/api/socials/${socialModal.socialId}`, { platform: socialModal.platform, username: socialModal.username, url: socialModal.url }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
                 console.log('axios');
                 getData();
                 toggleSocialModal();
@@ -52,7 +52,7 @@ export default function SocialsComponent({ userInfo, token, getData }) {
     };
 
     const handleRemoveSocial = () => {
-        axios.delete(`https://localhost:7101/api/socials/${socialModal.socialId}`, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
+        axios.delete(`https://profilelinkapp.azurewebsites.net/api/socials/${socialModal.socialId}`, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
             getData();
             toggleSocialModal();
         });
@@ -102,7 +102,7 @@ export default function SocialsComponent({ userInfo, token, getData }) {
                     <Dialog open={socialModal.open} onClose={() => toggleSocialModal()} className='fixed top-0 left-0 z-50 flex items-start justify-center w-screen h-screen pt-20 bg-black md:pt-0 md:items-center bg-opacity-20'>
                         <Dialog.Panel className='box-border w-5/6 max-w-2xl p-6 mx-6 transition-all duration-150 bg-white sm:w-4/6 rounded-2xl sm:min-w-1/6'>
                             <Dialog.Title className='flex items-center justify-between mb-4 font-semibold text-md'>
-                                {socialModal.platform.length > 0 && socialModal.edit == true ? `Edit ${socialModal.platform}` : 'Add New Social'}
+                                {socialModal.edit == true ? `Edit ${socialModal.platform}` : 'Add New Social'}
                                 <div onClick={() => toggleSocialModal()} className='p-2 transition bg-gray-200 rounded-md cursor-pointer select-none hover:bg-gray-300'>
                                     <Image src='/closebtn.svg' width='0' height='0' sizes='100%' className='w-4 h-4' />
                                 </div>
@@ -163,7 +163,7 @@ export default function SocialsComponent({ userInfo, token, getData }) {
                             </div>
 
                             <div className='flex gap-4 mt-8'>
-                                {socialModal.platform.length > 0 && socialModal.edit == true ? (
+                                {socialModal.edit == true ? (
                                     <button onClick={() => handleRemoveSocial()} className='w-1/3 px-3 py-2 font-medium transition bg-gray-200 rounded-md select-none hover:bg-gray-300'>
                                         Remove
                                     </button>
