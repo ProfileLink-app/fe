@@ -8,7 +8,7 @@ export default function AboutComponent({ profileData, fontColor }) {
             <Image src={user} width='0' height='0' sizes='100%' className='w-24 h-24 p-2 mb-6 bg-white rounded-full bg-opacity-40' />
             <h1 className='mb-2 text-3xl font-semibold'>{profileData.firstName} {profileData.lastName}</h1>
             <h2 className='mb-5 text-sm'>@{profileData.username}</h2>
-            <h2 className='mb-5 text-md'>{profileData.bio}</h2>
+            <h2 className='mb-5 text-center text-md'>{profileData.bio}</h2>
             <div className='flex flex-wrap justify-center gap-3 select-none'>
                 {profileData.socials?.map((item, key) => {
                     return (

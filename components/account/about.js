@@ -13,7 +13,7 @@ import user from '../../public/user.png';
 export default function AboutComponent({ userInfo, setUserInfo, token, getData }) {
     const [editing, setEditing] = useState(false);
     const currentUsername = userInfo.username;
-    const [username, setUsername] = useState(userInfo.username);
+    const [username, setUsername] = useState();
     const [usernameTaken, setUsernameTaken] = useState(false);
     const handleSaveAbout = () => {
         if (usernameTaken == false && username.length > 0 && userInfo.theme.length == 6) {
@@ -38,13 +38,17 @@ export default function AboutComponent({ userInfo, setUserInfo, token, getData }
         }
     };
 
+    console.log(userInfo);
+    console.log(username);
+
     useEffect(() => {
         checkUsernameValid();
     }, [username]);
 
     useEffect(() => {
         setUsername(userInfo.username);
-    }, [])
+    }, [userInfo])
+    
 
     return (
         <>
@@ -57,7 +61,7 @@ export default function AboutComponent({ userInfo, setUserInfo, token, getData }
                                 <button onClick={() => handleCancelAbout()} className='px-3 py-1.5 text-sm text-black transition rounded-md bg-gray-200 hover:bg-gray-300'>
                                     Cancel
                                 </button>
-                                <button onClick={() => handleSaveAbout()} className={(usernameTaken || userInfo.theme.length != 6 || username.length < 1) ? 'px-3 py-1.5 text-sm text-white transition rounded-md bg-[#074588] cursor-default' : 'px-3 py-1.5 text-sm text-white transition rounded-md bg-secondary hover:bg-secondary-hover'}>
+                                <button onClick={() => handleSaveAbout()} className={usernameTaken || userInfo.theme.length != 6 || username.length < 1 ? 'px-3 py-1.5 text-sm text-white transition rounded-md bg-[#074588] cursor-default' : 'px-3 py-1.5 text-sm text-white transition rounded-md bg-secondary hover:bg-secondary-hover'}>
                                     Save
                                 </button>
                             </div>
