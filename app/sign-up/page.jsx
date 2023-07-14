@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
@@ -19,11 +19,19 @@ export default function SignUp() {
                             Sign in now!
                         </Link>
                     </h3>
-                    <div className='w-full mt-6'>
-                        <label className='block pr-4 mb-1.5 font-medium text-sm' for='name'>
-                            Name
-                        </label>
-                        <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='name' type='text' />
+                    <div className='flex w-full gap-2 mt-6'>
+                        <div className='w-1/2'>
+                            <label className='block pr-4 mb-1.5 font-medium text-sm' for='name'>
+                                First Name
+                            </label>
+                            <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='name' type='text' />
+                        </div>
+                        <div className='w-1/2'>
+                            <label className='block pr-4 mb-1.5 font-medium text-sm' for='name'>
+                                Last Name
+                            </label>
+                            <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='name' type='text' />
+                        </div>
                     </div>
 
                     <div className='w-full mt-3'>
