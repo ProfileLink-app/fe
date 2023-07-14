@@ -38,9 +38,6 @@ export default function AboutComponent({ userInfo, setUserInfo, token, getData }
         }
     };
 
-    console.log(userInfo);
-    console.log(username);
-
     useEffect(() => {
         checkUsernameValid();
     }, [username]);
