@@ -22,14 +22,12 @@ export default function SignIn() {
 
     const signInUser = (e) => {
         e.preventDefault();
-        console.log(1)
         axios
             .post(`https://profilelinkapp.azurewebsites.net/api/authentication`, {
                 username: credentials.username,
                 password: credentials.password,
             })
             .then((resp) => {
-                console.log(resp)
                 localStorage.setItem('token', resp.data);
                 push('/account');
             })

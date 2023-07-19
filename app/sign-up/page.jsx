@@ -1,4 +1,7 @@
 'use client';
+import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 
@@ -6,6 +9,33 @@ import dynamic from 'next/dynamic';
 const HeaderComponent = dynamic(() => import('../../components/header'));
 
 export default function SignUp() {
+    const { push } = useRouter();
+    const [registration, setRegistration] = useState({ firstName: '', lastName: '', username: '', password: '' });
+    const [error, setError] = useState('');
+
+    const handleChanges = (e) => {
+        setError('');
+        setRegistration({ ...registration, [e.target.name]: e.target.value });
+        console.log(registration);
+    };
+
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        if ((registration.firstName.length == 0, registration.lastName.length == 0, registration.username.length == 0, registration.password.length == 0)) {
+            setError('All fields required.');
+        } else {
+            axios
+                .post(`https://profilelinkapp.azurewebsites.net/api/authentication/username`, { current: registration.username, updated: registration.username })
+                .then((resp) => {
+                    console.log(resp)
+                })
+                .catch((err) => {
+                    console.log(err)
+                    setError('Username is taken.');
+                });
+        }
+    };
+
     return (
         <div className='min-h-screen overflow-hidden bg-white sm:bg-gray-100'>
             <HeaderComponent transparent={false} fontColor='#FFFFFF' />
@@ -19,37 +49,40 @@ export default function SignUp() {
                             Sign in now!
                         </Link>
                     </h3>
-                    <div className='flex w-full gap-2 mt-6'>
-                        <div className='w-1/2'>
-                            <label className='block pr-4 mb-1.5 font-medium text-sm' for='name'>
-                                First Name
-                            </label>
-                            <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='name' type='text' />
+                    <form onSubmit={handleSignUp}>
+                        <div className='flex w-full gap-2 mt-6'>
+                            <div className='w-1/2'>
+                                <label className='block pr-4 mb-1.5 font-medium text-sm' for='name'>
+                                    First Name
+                                </label>
+                                <input id='firstName' type='text' name='firstName' onChange={handleChanges} className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' />
+                            </div>
+                            <div className='w-1/2'>
+                                <label className='block pr-4 mb-1.5 font-medium text-sm' for='name'>
+                                    Last Name
+                                </label>
+                                <input id='lastName' type='text' name='lastName' onChange={handleChanges} className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' />
+                            </div>
                         </div>
-                        <div className='w-1/2'>
-                            <label className='block pr-4 mb-1.5 font-medium text-sm' for='name'>
-                                Last Name
+
+                        <div className='w-full mt-3'>
+                            <label className='block pr-4 mb-1.5 font-medium text-sm' for='username'>
+                                Username
                             </label>
-                            <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='name' type='text' />
+                            <input id='username' type='text' name='username' onChange={handleChanges} className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' />
                         </div>
-                    </div>
 
-                    <div className='w-full mt-3'>
-                        <label className='block pr-4 mb-1.5 font-medium text-sm' for='username'>
-                            Username
-                        </label>
-                        <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='username' type='text' />
-                    </div>
-
-                    <div className='w-full mt-3'>
-                        <label className='block pr-4 mb-1.5 font-medium text-sm' for='password'>
-                            Password
-                        </label>
-                        <input className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' id='password' type='password' />
-                    </div>
-                    <Link href='/account'>
-                        <button className='w-full px-4 py-2 mt-6 text-sm font-medium text-white transition rounded-md bg-primary hover:bg-primary-hover h-min'>Sign Up</button>
-                    </Link>
+                        <div className='w-full mt-3'>
+                            <label className='block pr-4 mb-1.5 font-medium text-sm' for='password'>
+                                Password
+                            </label>
+                            <input id='password' type='password' name='password' onChange={handleChanges} className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' />
+                        </div>
+                        {error.length > 0 && <p>{error}</p>}
+                        <button type='submit' className='w-full px-4 py-2 mt-6 text-sm font-medium text-white transition rounded-md bg-primary hover:bg-primary-hover h-min'>
+                            Sign Up
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

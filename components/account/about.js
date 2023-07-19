@@ -15,6 +15,7 @@ export default function AboutComponent({ userInfo, setUserInfo, token, getData }
     const currentUsername = userInfo.username;
     const [username, setUsername] = useState();
     const [usernameTaken, setUsernameTaken] = useState(false);
+    
     const handleSaveAbout = () => {
         if (usernameTaken == false && username.length > 0 && userInfo.theme.length == 6) {
             axios.put(`https://profilelinkapp.azurewebsites.net/api/users/${userInfo.userId}`, { firstName: userInfo.firstName, lastName: userInfo.lastName, username: username, bio: userInfo.bio, theme: userInfo.theme }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
