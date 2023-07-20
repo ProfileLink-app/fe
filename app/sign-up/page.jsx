@@ -17,7 +17,6 @@ export default function SignUp() {
     const handleChanges = (e) => {
         setError('');
         setRegistration({ ...registration, [e.target.name]: e.target.value });
-        console.log(registration);
     };
 
     const handleSignUp = (e) => {
@@ -32,7 +31,7 @@ export default function SignUp() {
                     username: registration.username,
                     password: registration.password,
                 })
-                .then(() => push('/account'))
+                .then(() => push('/sign-in'))
                 .catch(() => setError('Username is taken.'));
         }
     };
