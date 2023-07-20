@@ -32,7 +32,7 @@ export default function SignUp() {
                     username: registration.username,
                     password: registration.password,
                 })
-                .then(() => push('/account'))
+                .then(() => push('/sign-in'))
                 .catch(() => setError('Username is taken.'));
         }
     };
