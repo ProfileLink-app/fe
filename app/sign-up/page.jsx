@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -12,6 +12,7 @@ export default function SignUp() {
     const { push } = useRouter();
     const [registration, setRegistration] = useState({ firstName: '', lastName: '', username: '', password: '' });
     const [error, setError] = useState('');
+    const [usernameTaken, setUsernameTaken] = useState(false);
 
     const handleChanges = (e) => {
         setError('');
@@ -25,16 +26,29 @@ export default function SignUp() {
             setError('All fields required.');
         } else {
             axios
-                .post(`https://profilelinkapp.azurewebsites.net/api/authentication/username`, { current: registration.username, updated: registration.username })
-                .then((resp) => {
-                    console.log(resp)
+                .post(`https://profilelinkapp.azurewebsites.net/api/users/register`, {
+                    firstName: registration.firstName,
+                    lastName: registration.lastName,
+                    username: registration.username,
+                    password: registration.password,
                 })
-                .catch((err) => {
-                    console.log(err)
-                    setError('Username is taken.');
-                });
+                .then(() => push('/account'))
+                .catch(() => setError('Username is taken.'));
         }
     };
+
+    const checkUsernameValid = () => {
+        if (registration.username.length > 0) {
+            axios
+                .post(`https://profilelinkapp.azurewebsites.net/api/authentication/username`, { username: registration.username })
+                .then(() => setUsernameTaken(false))
+                .catch(() => setUsernameTaken(true));
+        }
+    };
+
+    useEffect(() => {
+        checkUsernameValid();
+    }, [registration.username]);
 
     return (
         <div className='min-h-screen overflow-hidden bg-white sm:bg-gray-100'>
@@ -65,11 +79,12 @@ export default function SignUp() {
                             </div>
                         </div>
 
-                        <div className='w-full mt-3'>
+                        <div className='relative w-full mt-3'>
                             <label className='block pr-4 mb-1.5 font-medium text-sm' for='username'>
                                 Username
                             </label>
-                            <input id='username' type='text' name='username' onChange={handleChanges} className='w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400' />
+                            <input id='username' type='text' name='username' onChange={handleChanges} className={usernameTaken ? 'text-red-400 w-full p-2 leading-tight transition bg-white border border-red-400 rounded-md appearance-none focus:outline-none' : 'w-full p-2 leading-tight text-gray-700 transition bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:border-gray-500 hover:border-gray-400'} />
+                            <div className='absolute top-0 right-0 text-sm font-semibold text-red-400 transition'>{usernameTaken ? 'Username unavailable' : ''}</div>
                         </div>
 
                         <div className='w-full mt-3'>

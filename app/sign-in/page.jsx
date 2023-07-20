@@ -31,10 +31,7 @@ export default function SignIn() {
                 localStorage.setItem('token', resp.data);
                 push('/account');
             })
-            .catch((error) => {
-                console.log(error)
-                setLoginError('Username or password is incorrect.');
-            });
+            .catch(() => setLoginError('Username or password is incorrect.'));
     };
 
     const getUserData = () => {
