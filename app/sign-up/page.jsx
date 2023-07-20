@@ -17,7 +17,6 @@ export default function SignUp() {
     const handleChanges = (e) => {
         setError('');
         setRegistration({ ...registration, [e.target.name]: e.target.value });
-        console.log(registration);
     };
 
     const handleSignUp = (e) => {
