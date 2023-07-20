@@ -15,6 +15,7 @@ export default function AboutComponent({ userInfo, setUserInfo, token, getData }
     const currentUsername = userInfo.username;
     const [username, setUsername] = useState();
     const [usernameTaken, setUsernameTaken] = useState(false);
+
     const handleSaveAbout = () => {
         if (usernameTaken == false && username.length > 0 && userInfo.theme.length == 6) {
             axios.put(`https://profilelinkapp.azurewebsites.net/api/users/${userInfo.userId}`, { firstName: userInfo.firstName, lastName: userInfo.lastName, username: username, bio: userInfo.bio, theme: userInfo.theme }, { headers: { 'Authorization': `Bearer ${token}` } }).then(() => {
@@ -30,10 +31,10 @@ export default function AboutComponent({ userInfo, setUserInfo, token, getData }
     };
 
     const checkUsernameValid = () => {
-        if (editing && username.length > 0) {
+        if (editing && currentUsername != username && username.length > 0) {
             axios
-                .post(`https://profilelinkapp.azurewebsites.net/api/authentication/username`, { current: currentUsername, updated: username })
-                .then((resp) => setUsernameTaken(false))
+                .post(`https://profilelinkapp.azurewebsites.net/api/authentication/username`, { username })
+                .then(() => setUsernameTaken(false))
                 .catch(() => setUsernameTaken(true));
         }
     };
@@ -44,8 +45,7 @@ export default function AboutComponent({ userInfo, setUserInfo, token, getData }
 
     useEffect(() => {
         setUsername(userInfo.username);
-    }, [userInfo])
-    
+    }, [userInfo]);
 
     return (
         <>
